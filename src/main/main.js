@@ -81,7 +81,6 @@ class Main extends React.Component {
 	 */
 	usePreset(id) {
 		const state = this.props.state;
-
 		Request
 			.get(C.LOCAL.PRESETS + id + '.json')
 			.end((err, res) => {

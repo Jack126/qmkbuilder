@@ -23,7 +23,6 @@ class Compile extends React.Component {
 
 		// Disable buttons.
 		state.ui.set('compile-working', true);
-
 		// Generate source files.
 		const files = Files.generate(keyboard);
 

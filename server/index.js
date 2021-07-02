@@ -10,7 +10,7 @@ const co = require('co');
 const envTMP = process.env.TMP || '/tmp/qmk-';
 const envPORT = process.env.PORT || 80;
 const envQMK = process.env.QMK || null;
-const envSTATIC = process.env.STATIC || null;
+const envSTATIC = process.env.STATIC || 'http://127.0.0.1:8000/';
 if (envQMK === null) {
   console.error('No QMK environment variable specified');
   process.exit(1);
@@ -40,10 +40,9 @@ app.use(Express.static(envSTATIC));
 app.post('/build', (req, res) => {
 	// Get the files.
 	const files = req.body;
-
 	// Create a temporary directory.
 	const key = Crypto.randomBytes(16).toString('hex');
-  const tmpdir = envTMP + key;
+  	const tmpdir = envTMP + key;
 
 	// Setup helper functions.
 	const clean = () => {
@@ -58,11 +57,10 @@ app.post('/build', (req, res) => {
 
 	// Start.
 	co(function*() {
-
 		// Copy the base stencil.
 		yield new Promise((resolve, reject) => {
 			Exec('cp -rp ' + envQMK + ' ' + tmpdir, (err, stdout, stderr) => {
-				if (err) return reject('Failed to initialize.');
+				if (err) return reject('Failed to initialize');
 				resolve();
 			});
 		});
@@ -72,21 +70,22 @@ app.post('/build', (req, res) => {
 			yield new Promise((resolve, reject) => {
 				const fileName = file.replace('qmk_firmware', tmpdir);
 				Fs.writeFile(fileName, files[file], err => {
-					if (err) return reject('Failed to initialize.');
+					if (err) return reject('Failed to initialize');
 					resolve();
 				});
 			});
 		}
 
-		// Make.
+		//Make.
 		yield new Promise((resolve, reject) => {
-			Exec('cd ' + tmpdir + '/keyboards/kb && make', (err, stdout, stderr) => {
-				if (err) return reject(stderr);
+			//Exec('cd ' + tmpdir + '/keyboards/kb && make', (err, stdout, stderr) => {
+			Exec('cd ' + tmpdir + ' && make kb', (err, stdout, stderr) => {
+				if (err) return reject(stderr+'===='+err);
 				resolve();
 			});
 		});
 
-		// Read the hex file.
+		//Read the hex file.
 		const hex = yield new Promise((resolve, reject) => {
 			Fs.readFile(tmpdir + '/kb_default.hex', 'utf8', (err, data) => {
 				if (err) return reject('Failed to read hex file.');
@@ -94,10 +93,10 @@ app.post('/build', (req, res) => {
 			});
 		});
 
-		// Send the hex file.
+		//Send the hex file.
 		res.json({ hex: hex });
 
-		// Clean up.
+		//Clean up.
 		clean();
 	}).catch(e => sendError(e));
 });

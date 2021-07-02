@@ -3,6 +3,6 @@
 node_modules
 
 bundle.js
-local.json
 
 .idea
+.DS_Store

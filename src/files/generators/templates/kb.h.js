@@ -5,7 +5,7 @@ module.exports = `
 
 #include "quantum.h"
 
-#define KEYMAP( \\
+#define LAYOUT_all( \\
 %keymap_1%
 ) { \\
 %keymap_2%

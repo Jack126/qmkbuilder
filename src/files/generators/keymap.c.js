@@ -11,10 +11,10 @@ class KeymapC extends Generator {
 
 		// Generate the keymaps.
 		let keymaps = '';
-		for (let layer = 0; layer < C.KEYMAP_MAX_LAYERS; layer ++) {
-			let layerMap = '\tKEYMAP(\n\t\t';
-			for (let row = 0; row < keyboard.rows; row ++) {
-				for (let col = 0; col < keyboard.cols; col ++) {
+		for (let layer = 0; layer < C.KEYMAP_MAX_LAYERS; layer++) {
+			let layerMap = '\LAYOUT_all(\n\t\t';
+			for (let row = 0; row < keyboard.rows; row++) {
+				for (let col = 0; col < keyboard.cols; col++) {
 					const key = keyboard.wiring[row + ',' + col];
 					if (!key || !key.length) continue;
 
