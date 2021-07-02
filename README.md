@@ -36,8 +36,12 @@ To deploy a production version of the application, run `npm run deploy`.
 Keyboard Firmware Builder is under the GNU GPL v3 license. The license information for QMK Firmware can be found at https://qmk.fm/license/.
 
 
+## Thanks
 
-My step:
+The source is forked from https://github.com/ruiqimao/qmkbuilder
+
+
+## My step:
 
 1、 install qmk and set qmk home path(ps. export QMK="/Users/qmk/qmk_firmware")
 
