@@ -38,10 +38,15 @@ Keyboard Firmware Builder is under the GNU GPL v3 license. The license informati
 
 
 My step:
+
 1、 install qmk and set qmk home path(ps. export QMK="/Users/qmk/qmk_firmware")
+
 2、 change src/const/local.json file
+
 3、 `cd / && npm install` and then run `npm run build` (src/static/js/bundle.js)
+
 4、 client  :  `cd ./static && python3 -m http.server`  and then open link http://localhost:8000
+
 5、 `cd server && node index.js`
 
 
