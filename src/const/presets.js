@@ -17,5 +17,6 @@ module.exports = {
 	'alps44': 'Alps44',
 	'miuni32-rgb-standard': 'Miuni32 RGB (Standard)',
     'treasure-type9-default': 'Treasure Macropad Type-9',
-    'zlant-default': 'Zlant'
+    'zlant-default': 'Zlant',
+	'xd60rev3-ansi': 'XD60REV3 (ANSI)'
 };
